@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
 
 class RandomWordState extends State<RandomWords> {
   @override
-  final List<WordPair>_suggestions = <WordPair>[];
+  final List<WordPair> _suggestions = <WordPair>[];
   final Set<WordPair> _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
@@ -23,25 +23,59 @@ class RandomWordState extends State<RandomWords> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Name Generator'),
+        actions: <Widget>[
+          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
+        ],
       ),
       body: _buildSuggestions(),
     );
   }
 
+  void _pushSaved() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          final Iterable<ListTile> tiles = _saved.map(
+                (WordPair pair) {
+              return new ListTile(
+                title: new Text(
+                  pair.asPascalCase,
+                  style: _biggerFont,
+                ),
+              );
+            },
+          );
+          final List<Widget> divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return new Scaffold(
+            // Add 6 lines from here...
+            appBar: new AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: new ListView(children: divided),
+          ); // ... to here.
+        },
+      ),
+    );
+  }
 
   Widget _buildSuggestions() {
     Widget _buildRow(WordPair pair) {
       final bool alreadySaved = _saved.contains(pair);
       return new ListTile(
-        title: new Text(
-          pair.asPascalCase,
-          style: _biggerFont,
-        ),
-        trailing: new Icon(
-          alreadySaved ? Icons.favorite : Icons.favorite_border,
-          color: alreadySaved ? Colors.red : null,
-        ),
-          onTap: () { // Add 9 lines from here...
+          title: new Text(
+            pair.asPascalCase,
+            style: _biggerFont,
+          ),
+          trailing: new Icon(
+            alreadySaved ? Icons.favorite : Icons.favorite_border,
+            color: alreadySaved ? Colors.red : null,
+          ),
+          onTap: () {
+            // Add 9 lines from here...
             setState(() {
               if (alreadySaved) {
                 _saved.remove(pair);
@@ -49,8 +83,7 @@ class RandomWordState extends State<RandomWords> {
                 _saved.add(pair);
               }
             });
-          }
-      );
+          });
     }
 
     return ListView.builder(
@@ -65,9 +98,6 @@ class RandomWordState extends State<RandomWords> {
           }
           return _buildRow(_suggestions[index]);
         });
-
-
-
   }
 }
 
