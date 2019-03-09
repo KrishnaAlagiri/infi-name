@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,6 +8,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Name Generator',
+      theme: new ThemeData(
+        primaryColor: Colors.red,
+      ),
       home: RandomWords(),
     );
   }
@@ -51,12 +54,11 @@ class RandomWordState extends State<RandomWords> {
           ).toList();
 
           return new Scaffold(
-            // Add 6 lines from here...
             appBar: new AppBar(
               title: const Text('Saved Suggestions'),
             ),
             body: new ListView(children: divided),
-          ); // ... to here.
+          );
         },
       ),
     );
@@ -75,7 +77,6 @@ class RandomWordState extends State<RandomWords> {
             color: alreadySaved ? Colors.red : null,
           ),
           onTap: () {
-            // Add 9 lines from here...
             setState(() {
               if (alreadySaved) {
                 _saved.remove(pair);
