@@ -1,16 +1,9 @@
-# name_generator
+Infi Names (Name Generator)
+=================================
 
-A simple mobile app built on Flutter that generates proposed names.
+[![Language](https://img.shields.io/badge/language-Flutter-blue.svg?style=flat)](https://www.flutter.dev)
+[![Platform](https://img.shields.io/badge/Platform-iOS-orange.svg?style=flat)](https://github.com/KrishnaAlagiri)
+[![Platform](https://img.shields.io/badge/Platform-Android-darkgreen.svg?style=flat)](https://github.com/KrishnaAlagiri)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+A simple mobile app developed entirely on **Flutter** that generates proposed names. This is my first Flutter Application
