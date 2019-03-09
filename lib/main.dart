@@ -15,17 +15,9 @@ class MyApp extends StatelessWidget {
 
 class RandomWordState extends State<RandomWords> {
   @override
-  final _suggestions = <WordPair>[];
+  final List<WordPair>_suggestions = <WordPair>[];
+  final Set<WordPair> _saved = new Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
-
-  Widget _buildRow(WordPair pair) {
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-    );
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +28,19 @@ class RandomWordState extends State<RandomWords> {
     );
   }
 
+
   Widget _buildSuggestions() {
     Widget _buildRow(WordPair pair) {
-      return ListTile(
-        title: Text(
+      final bool alreadySaved = _saved.contains(pair);
+
+      return new ListTile(
+        title: new Text(
           pair.asPascalCase,
           style: _biggerFont,
+        ),
+        trailing: new Icon(
+          alreadySaved ? Icons.favorite : Icons.favorite_border,
+          color: alreadySaved ? Colors.red : null,
         ),
       );
     }
@@ -56,6 +55,9 @@ class RandomWordState extends State<RandomWords> {
           }
           return _buildRow(_suggestions[index]);
         });
+
+
+
   }
 }
 
